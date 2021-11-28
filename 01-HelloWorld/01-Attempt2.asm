@@ -20,6 +20,15 @@ _start:
     mov rdx, msglen ; buffer length
     syscall ; execute syscall
 
+
+    mov rax, 0 ; sys_read
+    sub rsp, 8 ; allocate 8-bytes on the stack as a read buffer?
+    mov rdi, 0 ; stdin
+    lea rsi, [rsp] ; set const char *buf to the 8-byte space on the stack ?
+    mov rdx, 1 ; one character
+    syscall
+
+
     mov rax, 60 ; sys_exit
     mov rdx, 0 ; error_code, 0 = default exit code
     syscall
